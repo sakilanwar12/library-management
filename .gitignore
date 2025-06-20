@@ -1,0 +1,35 @@
+# node modules
+node_modules
+
+# log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment variables
+.env
+.env.*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# TypeScript
+dist/
+build/
+*.tsbuildinfo
+
+# Vite / Webpack / temp files
+.vite/
+.cache/
+
+# VS Code
+.vscode/
+
+# Nodemon
+nodemon.json
+
+# Lock files (optional if using pnpm only)
+package-lock.json
+yarn.lock

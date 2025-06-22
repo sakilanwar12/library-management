@@ -1,7 +1,8 @@
 // models/book.model.ts
 import mongoose, { Schema } from "mongoose";
+import { IBookDocument, IBookModel } from "../interfaces/book.interface";
 
-const bookSchema = new Schema(
+const bookSchema = new Schema<IBookDocument, IBookModel>(
   {
     title: { type: String, required: true },
     author: { type: String, required: true },
@@ -13,6 +14,14 @@ const bookSchema = new Schema(
   },
   { timestamps: true }
 );
+bookSchema.methods.updateAvailability = function () {
+  if (this.copies <= 0) {
+    this.available = false;
+  } else {
+    this.available = true;
+  }
+};
 
-const Book = mongoose.model("Book", bookSchema);
+const Book = mongoose.model<IBookDocument, IBookModel>("Book", bookSchema);
+
 export default Book;

@@ -1,3 +1,5 @@
+import { Model } from "mongoose";
+
 export enum EGenre {
   FICTION = "FICTION",
   NON_FICTION = "NON_FICTION",
@@ -19,3 +21,7 @@ export interface IBook {
   available?: boolean;
 }
 
+export interface IBookDocument extends IBook, Document {
+  updateAvailability(): void;
+}
+export interface IBookModel extends Model<IBookDocument> {}

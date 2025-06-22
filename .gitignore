@@ -33,3 +33,4 @@ nodemon.json
 # Lock files (optional if using pnpm only)
 package-lock.json
 yarn.lock
+.vercel

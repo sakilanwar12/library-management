@@ -64,3 +64,46 @@ export const createBorrow = async (req: Request, res: Response) => {
       );
   }
 };
+
+
+export const getBorrowedBooksSummary = async (req: Request, res: Response) => {
+  try {
+    const summary = await Borrow.aggregate([
+      {
+        $group: {
+          _id: "$book",
+          totalQuantity: { $sum: "$quantity" }
+        }
+      },
+      {
+        $lookup: {
+          from: "books", // collection name (lowercase plural)
+          localField: "_id",
+          foreignField: "_id",
+          as: "bookDetails"
+        }
+      },
+      {
+        $unwind: "$bookDetails"
+      },
+      {
+        $project: {
+          _id: 0,
+          book: {
+            title: "$bookDetails.title",
+            isbn: "$bookDetails.isbn"
+          },
+          totalQuantity: 1
+        }
+      }
+    ]);
+
+    res.status(200).json(
+      apiResponse(true, "Borrowed books summary retrieved successfully", summary)
+    );
+  } catch (error) {
+    res
+      .status(500)
+      .json(apiResponse(false, "Internal Server Error", (error as Error).message));
+  }
+};

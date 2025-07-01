@@ -4,10 +4,9 @@ import { bookSchema } from "../schemas/bookSchema";
 import { apiResponse } from "../lib/apiResponse";
 import { ZodError } from "zod";
 import { getLimit, getSort } from "../lib/utils";
+const bookRouter = express.Router();
 
-export const bookRouter = express.Router();
-
-export const createBook = async (req: Request, res: Response) => {
+bookRouter.post("/", async (req: Request, res: Response) => {
   try {
     const body = await bookSchema.parseAsync(req.body);
 
@@ -32,8 +31,8 @@ export const createBook = async (req: Request, res: Response) => {
         apiResponse(false, "Internal Server Error", (error as Error).message)
       );
   }
-};
-export const getBooks = async (req: Request, res: Response) => {
+});
+bookRouter.get("/", async (req: Request, res: Response) => {
   try {
     const {
       filter,
@@ -64,9 +63,9 @@ export const getBooks = async (req: Request, res: Response) => {
         apiResponse(false, "Internal Server Error", (error as Error).message)
       );
   }
-};
+});
 
-export const getBookById = async (req: Request, res: Response) => {
+bookRouter.get("/:bookId", async (req: Request, res: Response) => {
   try {
     const book = await Book.findById(req.params.bookId);
     if (book) {
@@ -83,9 +82,9 @@ export const getBookById = async (req: Request, res: Response) => {
         apiResponse(false, "Internal Server Error", (error as Error).message)
       );
   }
-};
+});
 
-export const updateABookById = async (req: Request, res: Response) => {
+bookRouter.put("/:bookId", async (req: Request, res: Response) => {
   try {
     const body = await bookSchema.parseAsync(req.body);
 
@@ -115,9 +114,9 @@ export const updateABookById = async (req: Request, res: Response) => {
         apiResponse(false, "Internal Server Error", (error as Error).message)
       );
   }
-};
+});
 
-export const deleteABookById = async (req: Request, res: Response) => {
+bookRouter.delete("/:bookId", async (req: Request, res: Response) => {
   try {
     const book = await Book.findByIdAndDelete(req.params.bookId);
     if (book) {
@@ -134,4 +133,5 @@ export const deleteABookById = async (req: Request, res: Response) => {
         apiResponse(false, "Internal Server Error", (error as Error).message)
       );
   }
-};
+});
+export default bookRouter;

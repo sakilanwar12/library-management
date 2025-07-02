@@ -10,10 +10,10 @@ export default defineConfig([
   tseslint.configs.recommended,
   {
 		rules: {
-			"no-unused-vars": "warn",
-			"no-undef": "warn",
-      "@typescript-eslint/no-unused-vars": ["warn"],
-      "@typescript-eslint/no-explicit-any": ["warn"],
+			// "no-unused-vars": "warn",
+			// "no-undef": "warn",
+      // "@typescript-eslint/no-unused-vars": ["warn"],
+      // "@typescript-eslint/no-explicit-any": ["warn"],
 		},
 	},
 ]);

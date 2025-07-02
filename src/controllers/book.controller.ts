@@ -41,7 +41,7 @@ bookRouter.get("/", async (req: Request, res: Response) => {
       limit = "10",
     } = req.query;
 
-    const query: Record<string, any> = {};
+    const query: Record<string, unknown> = {};
 
     // If genre filter provided
     if (filter) {

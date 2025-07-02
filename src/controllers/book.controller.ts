@@ -84,7 +84,7 @@ bookRouter.get("/:bookId", async (req: Request, res: Response) => {
   }
 });
 
-bookRouter.put("/:bookId", async (req: Request, res: Response) => {
+bookRouter.patch("/:bookId", async (req: Request, res: Response) => {
   try {
     const body = await bookSchema.parseAsync(req.body);
 

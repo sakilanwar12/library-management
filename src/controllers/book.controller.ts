@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import Book from "../models/book.model";
-import { bookSchema } from "../schemas/bookSchema";
+import { bookSchema, updateBookSchema } from "../schemas/bookSchema";
 import { apiResponse } from "../lib/apiResponse";
 import { ZodError } from "zod";
 import { getLimit, getSort } from "../lib/utils";
@@ -86,7 +86,7 @@ bookRouter.get("/:bookId", async (req: Request, res: Response) => {
 
 bookRouter.patch("/:bookId", async (req: Request, res: Response) => {
   try {
-    const body = await bookSchema.parseAsync(req.body);
+    const body = await updateBookSchema.parseAsync(req.body);
 
     const book = await Book.findByIdAndUpdate(req.params.bookId, body, {
       new: true,

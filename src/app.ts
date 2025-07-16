@@ -4,7 +4,11 @@ import bookRouter from "./controllers/book.controller";
 import borrowRouter from "./controllers/borrow.controller";
 
 const app: Application = express();
-app.use(cors())
+app.use(
+  cors({
+    origin: "https://library-management-frontend-bay.vercel.app/",
+  })
+);
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello World!");

@@ -1,9 +1,10 @@
 import express, { Application } from "express";
-
+import cors from "cors"
 import bookRouter from "./controllers/book.controller";
 import borrowRouter from "./controllers/borrow.controller";
 
 const app: Application = express();
+app.use(cors())
 app.use(express.json());
 app.get("/", (req, res) => {
   res.send("Hello World!");

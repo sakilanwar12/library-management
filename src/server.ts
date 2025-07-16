@@ -1,12 +1,13 @@
 import app from "./app";
 import mongoose from "mongoose";
-
-const PORT = 5000;
+import dotenv from "dotenv";
+dotenv.config();
+const PORT = process.env.PORT || 5000;
+const MONGO_DB_URI = process.env.EXPRESS_APP_MONGO_DB_URI as string;
 async function bootstrap() {
   try {
-    await mongoose.connect(
-      "mongodb+srv://library-management-admin:hyO31Srz5E8wxHi1@cluster0.fdaifxk.mongodb.net/library-management"
-    );
+    console.log("Connecting to MongoDB",MONGO_DB_URI);
+    await mongoose.connect(MONGO_DB_URI);
     console.log("Connected to MongoDB");
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT} http://localhost:${PORT}`);
